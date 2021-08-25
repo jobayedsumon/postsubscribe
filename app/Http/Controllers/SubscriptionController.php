@@ -12,8 +12,8 @@ class SubscriptionController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'website_id' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'website_id' => 'required|exists:websites,id',
         ]);
 
         if ($validator->fails()) {
