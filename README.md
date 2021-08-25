@@ -24,3 +24,6 @@ to create new website with 'url', 'title' and 'description'
 to subscribe a user in a particular website with 'user_id' and 'website_id'
 # /api/post
 to create new post with 'website_id', 'title' and 'description'
+
+API documentation link -
+# https://documenter.getpostman.com/view/15047522/TzzGGDiP
