@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Subscriber;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmail extends Command
@@ -39,11 +39,15 @@ class SendEmail extends Command
      */
     public function handle()
     {
-        $subscribers = Subscriber::all();
+        $subscribers = DB::table('subscriptions')
+            ->join('users', 'users.id', '=', 'subscriptions.user_id')
+            ->select('users.name', 'users.email')
+            ->get();
+
         foreach ($subscribers as $subscriber) {
             Mail::raw('Welcome to our community', function ($message) use ($subscriber) {
                 $message->to($subscriber->email)
-                ->subject('Good Morning');
+                ->subject('Hello '.$subscriber->name);
             });
         }
 
